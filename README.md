@@ -1,60 +1,64 @@
-# Solidity Template
+# Blockchain Team template for Hardhat
 
-Uses
+This is a GitHub template, which means you can reuse it as many times as you want. 
+> You can do that by clicking the "Use this template" button at the top of the page.
 
+Tech stack:
 - [Hardhat](https://github.com/nomiclabs/hardhat): compile and run the smart contracts on a local development network
 - [TypeChain](https://github.com/ethereum-ts/TypeChain): generate TypeScript types for smart contracts
 - [Ethers](https://github.com/ethers-io/ethers.js/): renowned Ethereum library and wallet implementation
 - [Waffle](https://github.com/EthWorks/Waffle): tooling for writing comprehensive smart contract tests
 - [Solhint](https://github.com/protofire/solhint): linter
 - [Prettier Plugin Solidity](https://github.com/prettier-solidity/prettier-plugin-solidity): code formatter
+- [Remixd](remix/README.md): plugin that connects project files with Remix
 
-This is a GitHub template, which means you can reuse it as many times as you want. You can do that by clicking the "Use this
-template" button at the top of the page.
+## Requirements
 
-## Usage
+Only requirements is:
+- Docker (with docker-compose)
 
-### Pre Requisites
+## Setup
 
-Before running any command, make sure to install dependencies:
-
+Fill in secrets:
 ```sh
-$ yarn install
+cp .env.template .env && nano .env
 ```
 
-### Compile
-
-Compile the smart contracts with Hardhat:
-
+Start container:
 ```sh
-$ yarn compile
+make up
 ```
 
-### Test
+## Compilation
 
-Run the Mocha tests:
-
+Compile contracts:
 ```sh
-$ yarn test
+make compile
 ```
 
-### Deploy contract to netowrk (requires Mnemonic and infura API key)
+### Testing
 
-```
-npx hardhat run --network rinkeby ./scripts/deploy.ts
-```
-
-### Validate a contract with etherscan (requires API ke)
-
-```
-npx hardhat verify --network <network> <DEPLOYED_CONTRACT_ADDRESS> "Constructor argument 1"
+Run tests with:
+```sh
+make runtest
 ```
 
-### Added plugins
+### Deployment
 
-- Gas reporter [hardhat-gas-reporter](https://hardhat.org/plugins/hardhat-gas-reporter.html)
-- Etherscan [hardhat-etherscan](https://hardhat.org/plugins/nomiclabs-hardhat-etherscan.html)
+Deploy to local node (Docker):
+```
+make deploy
+```
 
-## Thanks
+Deploy to Rinkeby:
+```
+make deploy-rinkeby
+```
 
-If you like it than you soulda put a start ⭐ on it 
+### Etherscan verification
+
+To verify contract code on Etherscan run:
+```
+docker-compose exec blockchain npx hardhat verify --network <network> <address> "args..."
+```
+> Example usage: docker-compose exec blockchain npx hardhat verify --network rinkeby 0xd94F3C21Ad78A403C964118646b849e768d69Dec

@@ -8,8 +8,3 @@ Run compilation to generate
 ```sh
 make compile
 ```
-
-## Important
-
-Typescript bindings are tracked in git, but frontend client (in subdir `factories`) is ignored by git:
-> It is recommended to run compilation locally to work with frontend client

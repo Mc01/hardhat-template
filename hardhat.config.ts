@@ -18,11 +18,15 @@ import { chainIds } from "./config/networks";
 
 function createEthereumNetworkConfig(network: keyof typeof chainIds): NetworkUserConfig {
     const url: string = `https://eth-${network}.alchemyapi.io/v2/${envConfig.crypto.ALCHEMY_KEY}`;
-    return {
-        accounts: [envConfig.crypto.PRIVATE_KEY],
+    let networkConfig: NetworkUserConfig = {
         chainId: chainIds[network],
         url,
     };
+    const pk: string = envConfig.crypto.PRIVATE_KEY;
+    if (pk != "") {
+        networkConfig.accounts = [pk];
+    }
+    return networkConfig;
 }
 
 const hardhatConfig: HardhatUserConfig = {

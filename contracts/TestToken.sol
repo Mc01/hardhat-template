@@ -61,15 +61,4 @@ contract TestToken is ERC20, AccessControl {
 
     }
 
-    /**************************************
-    
-        Test for fun
-
-     **************************************/
-
-    function test() external view 
-    returns (uint256) {
-        return 4; // random number
-    }
-
 }
